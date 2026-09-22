@@ -1,0 +1,179 @@
+http://localhost:4004/odata/v4/catalog
+
+###
+http://localhost:4004/odata/v4/catalog/BPSrv
+
+###
+http://localhost:4004/odata/v4/catalog/ProductSrv
+
+###
+http://localhost:4004/odata/v4/catalog/EmployeeSrv
+
+###
+http://localhost:4004/odata/v4/catalog/AddressSrv
+
+###
+http://localhost:4004/odata/v4/catalog/POSrv
+
+###
+http://localhost:4004/odata/v4/catalog/POISrv
+
+### $top, $skip, $select, $filter, $expand
+
+### Read the data from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv
+
+### Read the data from Product Service
+GET http://localhost:4004/odata/v4/catalog/localhost:4004/odata/v4/catalog/ProductSrvSrv
+
+### Read the first 10 employee from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$top=10
+
+
+### Read the 11th to 20th employee from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$top=10&$skip=10
+
+### Read number of employee from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv/$count
+
+### Read specific detail of employee from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$select=nameFirst,nameLast,phoneNumber,email,accountNumber,salaryAmount
+
+### Read only female employee
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$filter=gender eq 'F'
+
+### Read only employee where their salary is mpre than 50000 USD
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv?$filter=salaryAmount gt 50000
+
+
+### Read all header and  item information from any service
+GET http://localhost:4004/odata/v4/catalog/POSrv?$expand=Items
+
+
+
+### Read specific employee from Employee Service
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv(02BD2137-0890-1EEA-A6C2-BB55C19787FB)
+
+
+### Insert a record into the Employee Service
+POST http://localhost:4004/odata/v4/catalog/EmployeeSrv
+Content-Type: application/json
+ 
+{
+  "Currency_code": "USD",
+  "ID": "02BD2137-0890-1EEA-A6C2-BB55C198C7CC",
+  "accountNumber": "87654311",
+  "bandId": "66669999",
+  "bankName": "My Bank of New York",
+  "email": "john.senna@itelo.info",
+  "gender": "M",
+  "language": "E",
+  "loginName": "JSENNA",
+  "nameFirst": "John",
+  "nameInitials": null,
+  "nameLast": "Senna",
+  "nameMiddle": null,
+  "phoneNumber": null,
+  "salaryAmount": "65518.00"
+}
+
+
+
+### Update saraly of an employee
+PUT http://localhost:4004/odata/v4/catalog/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C198C7CC
+Content-Type: application/json
+ 
+{
+  "Currency_code": "USD",
+  "salaryAmount": "120000.00"
+}
+
+
+
+### Remove an employee
+DELETE http://localhost:4004/odata/v4/catalog/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C198C7CC
+
+
+### Insert a record into the Product Service
+POST http://localhost:4004/odata/v4/catalog/ProductSrv
+Content-Type: application/json
+
+{
+      "BP_NODE_KEY": "74867AD200E41EDBA5D8B06885AB2052",
+      "CATEGORY": "Notebooks",
+      "CURRENCY_CODE": "EUR",
+      "DEPTH": "18.00",
+      "DESCRIPTION": "Samsung",
+      "DIM_UNIT": "CM",
+      "HEIGHT": "3.00",
+      "MEASURE_UNIT": "EA",
+      "NODE_KEY": "74867AD200E41EDBA5D8B06B26EB40Z1",
+      "PRICE": "1056.00",
+      "PRODUCT_ID": "HT-5100",
+      "TAX_TARIF_CODE": 1,
+      "TYPE_CDOE": "PR",
+      "WEIGHT_MEASURE": "6.20",
+      "WEIGHT_UNIT": "KG",
+      "WIDTH": "40.00"
+}
+
+
+### Update a record into the Product Service
+PUT  http://localhost:4004/odata/v4/catalog/ProductSrv/74867AD200E41EDBA5D8B06B26EB40Z1
+Content-Type: application/json
+
+{
+      "CURRENCY_CODE": "EUR",
+      "PRICE": "1600.00"
+}
+
+
+### Remove an product
+DELETE http://localhost:4004/odata/v4/catalog/ProductSrv/74867AD200E41EDBA5D8B06B26EB40Z1
+
+
+### Call the custom function
+GET http://localhost:4004/odata/v4/catalog/getTopFiveSalariedEmployees()
+
+
+### Call the custom function
+GET http://localhost:4004/odata/v4/catalog/getTop10Products()
+
+
+
+### Insert a record into the Employee Service
+POST http://localhost:4004/odata/v4/catalog/createEmployee
+Content-Type: application/json
+
+{ 
+  "input" : [
+    {
+      "Currency_code": "USD",
+      "ID": "02BD2137-0890-1EEA-A6C2-BB55C198C7CF",
+      "accountNumber": "87654311",
+      "bandId": "66669999",
+      "bankName": "My Bank of New York",
+      "email": "john.senna@itelo.info",
+      "gender": "M",
+      "language": "E",
+      "loginName": "JSENNA",
+      "nameFirst": "John",
+      "nameInitial": null,
+      "nameLast": "Senna",
+      "nameMiddle": null,
+      "phoneNumber": null,
+      "salaryAmount": "65518.00"
+    }
+  ]
+}
+
+
+### Provide discount using instance bounded action
+POST http://localhost:4004/odata/v4/catalog/POSrv/74867AD200E41EDBA5D8B0C98DC28052/discountPrice
+Content-Type: application/json
+
+{ }
+
+### Provide discount using instance bounded function
+GET http://localhost:4004/odata/v4/catalog/POSrv/74867AD200E41EDBA5D8B0C98DC28052/largestOrder()
+
