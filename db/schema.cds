@@ -14,7 +14,7 @@ context master {
         WEB : String(255)           @(title: '{i18n>WEB}');
         BP_ID : cmn.identity        @(title: '{i18n>BP_ID}');
         COMPPANY_NAME : String(255) @(title: '{i18n>COMPANY_NAME}');
-        //Managed Association
+        //Managed Association 
         AD : Association to Address @(title: '{i18n>ADDRESS_GUID}');
     }
 
@@ -75,7 +75,7 @@ context transaction {
         OVERALL_STATUS : String(1)  @(title: '{i18n>OVERALL_STATUS}');
         // Managed Association of different context - Cardinality - one to one
         PARTNER : Association to one master.BusinessPartners    @(title: '{i18n>PARTNER_GUID}');
-        // Unmanaged Association - Cardinality - one to one
+        // Unmanaged Association with Cardinality - one to one
         Items : Association to many PurchaseItems on Items.PARENT = $self
     }
 
@@ -83,7 +83,7 @@ context transaction {
         key NODE_KEY : cmn.identity @(title: '{i18n>NODE_KEY}');
         PO_ITEMS_POS : Integer      @(title: '{i18n>PO_ITEMS_POS}');
         PARENT : Association to one PurchaseOrders  @(title: '{i18n>PARENT_KEY}');
-        // Managed Association of different context - Cardinality - one to one
+        // Managed Association of different context with Cardinality with one to one
         PROD : Association to one master.Product @(title: '{i18n>PRODUCT_GUID}');       
     }    
 }
