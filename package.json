@@ -27,7 +27,7 @@
     "requires": {
       "[production]": {
         "auth": {
-          "kind" : "xsuaa"
+          "kind" : "xsuaa" 
         }
       }
     }
